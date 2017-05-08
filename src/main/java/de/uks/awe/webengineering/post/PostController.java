@@ -3,7 +3,7 @@ package de.uks.awe.webengineering.post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * HTTP endpoint for a post-related HTTP requests.
@@ -14,7 +14,7 @@ public class PostController {
     private PostService postService;
 
     @RequestMapping(value = "/post")
-    public List<Post> getPostList() {
+    public Iterable<Post> getPostList() {
         return postService.getPosts();
     }
 
@@ -29,12 +29,14 @@ public class PostController {
     }
 
     @RequestMapping(value = "/post/new", method = RequestMethod.PUT)
-    public void addPost(@RequestParam("title") String title) {
-        postService.createPost(title);
+    public String addPost(HttpServletRequest request, @RequestParam("title") String title) {
+        Post post = postService.createPost(title);
+        // currently no need for a JsonObject, or another Class, thus per Hand:
+        return "{\"url\": \"" + request.getRequestURL().toString().replace(request.getRequestURI(), request.getContextPath()) + "/post/" + post.getId() + "\"}";
     }
 
     @RequestMapping(value = "/post/{id}", method = RequestMethod.DELETE)
-    public void deletePost(@PathVariable String id) {
+    public void deletePost(@PathVariable Long id) {
         postService.deletePost(id);
     }
 }
