@@ -1,30 +1,31 @@
 package de.uks.awe.webengineering.post;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by alexw on 03.05.2017.
  */
 public class Post {
     
-    private String id;
-    private Timestamp timeOfCreation;
+    private Long id;
+    private Date timeOfCreation;
     private String content;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public Post withId(String id) {
+    public Post withId(Long id) {
         this.id = id;
         return this;
     }
 
-    public Timestamp getTimeOfCreation() {
+    public Date getTimeOfCreation() {
         return timeOfCreation;
     }
 
-    public Post withTimeOfCreation(Timestamp timeOfCreation) {
+    public Post withTimeOfCreation(Date timeOfCreation) {
         this.timeOfCreation = timeOfCreation;
         return this;
     }

@@ -3,10 +3,8 @@ package de.uks.awe.webengineering.post;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Handle all CRUD operations for posts.
@@ -14,6 +12,12 @@ import java.util.UUID;
 @Service
 public class PostService {
     private List<Post> posts = new LinkedList<>();
+
+    private AtomicLong atomicLong;
+
+    public PostService() {
+        atomicLong = new AtomicLong();
+    }
 
     /**
      * Retrieve the list of all posts.
@@ -29,7 +33,7 @@ public class PostService {
      *
      * @return post
      */
-    public Post getPost(String id) {
+    public Post getPost(Long id) {
         if (id == null) {
             return null;
         }
@@ -65,9 +69,9 @@ public class PostService {
         }
         Post post = new Post();
         post.withContent(title);
-        post.withTimeOfCreation(new Timestamp(System.currentTimeMillis()));
+        post.withTimeOfCreation(new Date(System.currentTimeMillis()));
         // replaced later, when using persistence
-        post.withId(UUID.randomUUID().toString());
+        post.withId(atomicLong.getAndIncrement());
         posts.add(post);
     }
 

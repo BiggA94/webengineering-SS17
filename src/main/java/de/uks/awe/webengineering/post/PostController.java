@@ -19,7 +19,7 @@ public class PostController {
     }
 
     @RequestMapping(value = "/post/{id}")
-    public Post getPost(@PathVariable String id) {
+    public Post getPost(@PathVariable Long id) {
         return postService.getPost(id);
     }
 
