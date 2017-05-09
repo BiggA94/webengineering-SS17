@@ -14,7 +14,10 @@ public class PostController {
     private PostService postService;
 
     @RequestMapping(value = "/post")
-    public Iterable<Post> getPostList() {
+    public Iterable<Post> getPostList(@RequestParam(value = "ordered", required = false, defaultValue = "false") boolean ordered) {
+        if (ordered) {
+            return postService.getPostsOrderedByTimeOfCreation();
+        }
         return postService.getPosts();
     }
 

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -73,5 +72,14 @@ public class PostService {
      */
     public void deletePost(Long id) {
         posts.delete(id);
+    }
+
+    /**
+     * Return All the posts ordered by the time of Creation
+     *
+     * @return posts ordered by timeOfCreation
+     */
+    public Iterable<Post> getPostsOrderedByTimeOfCreation() {
+        return posts.getAllByIdNotNullOrderByTimeOfCreation();
     }
 }
