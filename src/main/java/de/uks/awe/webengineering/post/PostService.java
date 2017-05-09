@@ -3,6 +3,7 @@ package de.uks.awe.webengineering.post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -10,6 +11,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * Handle all CRUD operations for posts.
  */
 @Service
+@Transactional
 public class PostService {
     @Autowired
     private PostRepository posts;

@@ -1,8 +1,9 @@
 package de.uks.awe.webengineering.post;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -14,11 +15,15 @@ public class Post {
     @Id
     @GeneratedValue
     private Long id;
+
+    @CreationTimestamp
+    @Column(insertable = true, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date timeOfCreation;
+
     private String content;
 
     public Post() {
-        timeOfCreation = new Date();
     }
 
     public Long getId() {
