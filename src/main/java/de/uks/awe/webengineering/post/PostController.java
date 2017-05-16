@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServletRequest;
  * HTTP endpoint for a post-related HTTP requests.
  */
 @RestController
+@RequestMapping("/api/post")
 public class PostController {
     @Autowired
     private PostService postService;
 
-    @RequestMapping(value = "/post")
+    @RequestMapping(value = "")
     public Iterable<Post> getPostList(@RequestParam(value = "ordered", required = false, defaultValue = "false") boolean ordered) {
         if (ordered) {
             return postService.getPostsOrderedByTimeOfCreation();
@@ -21,24 +22,24 @@ public class PostController {
         return postService.getPosts();
     }
 
-    @RequestMapping(value = "/post/{id}")
+    @RequestMapping(value = "/{id}")
     public Post getPost(@PathVariable Long id) {
         return postService.getPost(id);
     }
 
-    @RequestMapping(value = "/post/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public void addPost(@RequestBody Post post) {
         postService.addPost(post);
     }
 
-    @RequestMapping(value = "/post/new", method = RequestMethod.PUT)
+    @RequestMapping(value = "/new", method = RequestMethod.PUT)
     public String addPost(HttpServletRequest request, @RequestParam("title") String title) {
         Post post = postService.createPost(title);
         // currently no need for a JsonObject, or another Class, thus per Hand:
         return "{\"url\": \"" + request.getRequestURL().toString().replace(request.getRequestURI(), request.getContextPath()) + "/post/" + post.getId() + "\"}";
     }
 
-    @RequestMapping(value = "/post/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deletePost(@PathVariable Long id) {
         postService.deletePost(id);
     }

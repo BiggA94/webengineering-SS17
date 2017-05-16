@@ -70,6 +70,25 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
+		<!--Authentication-->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.7.0</version>
+		</dependency>
+		<!--We actually need spring-security simply for its request-based security context holder.-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<!--Utilities-->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

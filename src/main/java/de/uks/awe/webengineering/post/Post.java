@@ -1,7 +1,6 @@
 package de.uks.awe.webengineering.post;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
+import de.uks.awe.webengineering.user.User;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,15 +10,30 @@ import java.util.Date;
  */
 @Entity
 public class Post {
+    public static final int TITLE_LENGTH = 1024;
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @CreationTimestamp
     @Column(insertable = true, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date timeOfCreation;
+
+    @ManyToOne(optional = false)
+    private User author;
+
+    @Column(length = Post.TITLE_LENGTH)
+    private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Post withTitle(String title) {
+        this.title = title;
+        return this;
+    }
 
     private String content;
 
@@ -51,5 +65,10 @@ public class Post {
     public Post withContent(String content) {
         this.content = content;
         return this;
+    }
+
+    @PrePersist
+    private void setTimeOfCreation() {
+        this.withTimeOfCreation(new Date());
     }
 }
