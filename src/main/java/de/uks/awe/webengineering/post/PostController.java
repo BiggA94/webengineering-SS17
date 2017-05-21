@@ -36,7 +36,7 @@ public class PostController {
     public String addPost(HttpServletRequest request, @RequestParam String title, @RequestParam String content) {
         Post post = postService.createPost(title, content);
         // currently no need for a JsonObject, or another Class, thus per Hand:
-        return "{\"url\": \"" + request.getRequestURL().toString().replace(request.getRequestURI(), request.getContextPath()) + "/post/" + post.getId() + "\"}";
+        return "{\"url\": \"" + request.getRequestURL().toString().replace(request.getRequestURI(), request.getContextPath()) + "/api/post/" + post.getId() + "\"}";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
