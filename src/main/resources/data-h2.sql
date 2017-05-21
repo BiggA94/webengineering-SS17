@@ -13,6 +13,6 @@ INSERT INTO USER_ (id, email, PASSWORD) VALUES
   (2, 'klaus', 'kleber');
 
 -- Add some posts.
-INSERT INTO POST (id, title, content,  AUTHOR_ID) VALUES
-  (1, 'title-1', 'content-1', 1),
-  (2, 'title-2', 'content-2', 2);
+INSERT INTO POST (id, title, content,  AUTHOR_ID, time_of_creation) VALUES
+  (1, 'title-1', 'content-1', 1, CURRENT_TIMESTAMP ),
+  (2, 'title-2', 'content-2', 2, CURRENT_TIMESTAMP );

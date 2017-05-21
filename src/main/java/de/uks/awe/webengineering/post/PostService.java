@@ -1,5 +1,6 @@
 package de.uks.awe.webengineering.post;
 
+import de.uks.awe.webengineering.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,9 @@ import java.util.concurrent.atomic.AtomicLong;
 public class PostService {
     @Autowired
     private PostRepository posts;
+
+    @Autowired
+    private UserService userService;
 
     private AtomicLong atomicLong;
 
@@ -55,12 +59,14 @@ public class PostService {
      * @param title the post title.
      * @return the newly created post
      */
-    public Post createPost(String title) {
+    public Post createPost(String title, String content) {
         if (title == null) {
             return null;
         }
         Post post = new Post();
-        post.withContent(title);
+        post.withTitle(title);
+        post.withContent(content);
+        post.withAuthor(userService.getCurrentUser());
         posts.save(post);
         return post;
     }

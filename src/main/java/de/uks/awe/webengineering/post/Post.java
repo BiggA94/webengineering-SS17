@@ -71,4 +71,13 @@ public class Post {
     private void setTimeOfCreation() {
         this.withTimeOfCreation(new Date());
     }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public Post withAuthor(User author) {
+        this.author = author;
+        return this;
+    }
 }

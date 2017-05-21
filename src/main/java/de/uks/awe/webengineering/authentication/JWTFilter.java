@@ -38,6 +38,7 @@ public class JWTFilter extends GenericFilterBean {
         if (!StringUtils.startsWith(auth, "Bearer ")) {
             LOG.warn("No authorization token submitted");
             httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
+            httpServletResponse.sendError(HttpStatus.UNAUTHORIZED.value());
             return;
         }
 

@@ -5,6 +5,7 @@ import de.uks.awe.webengineering.user.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,8 @@ public class AuthenticationService {
     @Autowired
     private UserService userService;
 
-    private String secret = "My Secret Message is '42'!";
+    @Value("${auth.secret}")
+    private String secret;
 
     /**
      * Return object containing a valid user and his corresponding JWT token.

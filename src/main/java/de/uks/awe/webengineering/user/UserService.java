@@ -1,6 +1,7 @@
 package de.uks.awe.webengineering.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,5 +18,9 @@ public class UserService {
 
     public Iterable<User> findAll() {
         return users.findAll();
+    }
+
+    public User getCurrentUser(){
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }
