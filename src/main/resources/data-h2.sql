@@ -4,6 +4,7 @@
 
 
 -- Remove everything.
+DELETE FROM COMMENT;
 DELETE FROM POST;
 DELETE FROM USER_;
 
@@ -16,3 +17,7 @@ INSERT INTO USER_ (id, email, PASSWORD) VALUES
 INSERT INTO POST (id, title, content,  AUTHOR_ID, time_of_creation) VALUES
   (1, 'title-1', 'content-1', 1, CURRENT_TIMESTAMP ),
   (2, 'title-2', 'content-2', 2, CURRENT_TIMESTAMP );
+
+-- Add some comments to posts.
+INSERT INTO COMMENT (id, AUTHOR_ID, POST_ID, content, time_of_creation) VALUES
+  (1, 1, 1, 'comment-1', CURRENT_TIMESTAMP);
